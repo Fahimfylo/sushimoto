@@ -1,0 +1,68 @@
+import type { Category } from "@/types";
+
+export const categories: Category[] = [
+  {
+    id: "sushi",
+    name: "Sushi",
+    slug: "sushi",
+    image: "/assets/sushi-9.png",
+    description: "Traditional and modern sushi rolls",
+    itemCount: 12,
+  },
+  {
+    id: "ramen",
+    name: "Ramen",
+    slug: "ramen",
+    image: "/assets/sushi-8.png",
+    description: "Rich and flavorful noodle soups",
+    itemCount: 8,
+  },
+  {
+    id: "udon",
+    name: "Udon",
+    slug: "udon",
+    image: "/assets/sushi-7.png",
+    description: "Thick wheat noodle dishes",
+    itemCount: 6,
+  },
+  {
+    id: "danggo",
+    name: "Danggo",
+    slug: "danggo",
+    image: "/assets/sushi-6.png",
+    description: "Sweet and savory dumplings",
+    itemCount: 5,
+  },
+  {
+    id: "appetizers",
+    name: "Appetizers",
+    slug: "appetizers",
+    image: "/assets/sushi-3.png",
+    description: "Start your meal right",
+    itemCount: 10,
+  },
+  {
+    id: "desserts",
+    name: "Desserts",
+    slug: "desserts",
+    image: "/assets/sushi-12.png",
+    description: "Sweet Japanese treats",
+    itemCount: 7,
+  },
+  {
+    id: "drinks",
+    name: "Drinks",
+    slug: "drinks",
+    image: "/assets/sushi-4.png",
+    description: "Refreshing beverages",
+    itemCount: 9,
+  },
+  {
+    id: "breakfast",
+    name: "Breakfast",
+    slug: "breakfast",
+    image: "/assets/sushi-2.png",
+    description: "Morning Japanese classics",
+    itemCount: 6,
+  },
+];
