@@ -1,5 +1,5 @@
-import { app } from '../server/src/app';
-import { connectDatabase } from '../server/src/config/database';
+import { app } from '../../POS_Restro/pos-backend/src/app';
+import { connectDatabase } from '../../POS_Restro/pos-backend/src/config/database';
 import type { Request, Response } from 'express';
 
 let connected = false;
