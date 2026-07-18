@@ -3,21 +3,22 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Search, ChevronDown, Grid3x3, List } from "lucide-react";
 import { foods } from "@/data/foods";
-import { categories } from "@/data/categories";
 import { FoodCard } from "@/components/cards/food-card";
 import { Container } from "@/components/layout/container";
+import { fetchCategories, fetchCategoryBySlug } from "@/lib/fetch-categories";
 
 interface Props {
   params: Promise<{ category: string }>;
 }
 
 export async function generateStaticParams() {
+  const categories = await fetchCategories();
   return categories.map((cat) => ({ category: cat.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { category } = await params;
-  const cat = categories.find((c) => c.slug === category);
+  const cat = await fetchCategoryBySlug(category);
   if (!cat) return { title: "Category Not Found" };
   return {
     title: `${cat.name}`,
@@ -27,10 +28,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function CategoryPage({ params }: Props) {
   const { category } = await params;
-  const cat = categories.find((c) => c.slug === category);
+  const cat = await fetchCategoryBySlug(category);
   if (!cat) notFound();
 
   const filteredFoods = foods.filter((f) => f.category === category);
+
+  const categories = await fetchCategories();
 
   return (
     <section className="py-16 md:py-24 lg:py-28">

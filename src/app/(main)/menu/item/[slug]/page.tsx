@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Check, Clock, Flame, ChefHat, Star } from "lucide-react";
+import { AddToCartButton } from "@/components/cards/add-to-cart-button";
 import { foods, getFoodBySlug } from "@/data/foods";
 import { categories } from "@/data/categories";
 import { FoodCard } from "@/components/cards/food-card";
@@ -178,9 +179,13 @@ export default async function ItemPage({ params }: Props) {
             </div>
 
             <div className="mt-8">
-              <Button size="lg" className="w-full rounded-full sm:w-auto">
-                Add to Order — ${food.price.toFixed(2)}
-              </Button>
+              <AddToCartButton
+                id={food.id}
+                name={food.name}
+                price={food.price}
+                image={food.image}
+                slug={food.slug}
+              />
             </div>
           </div>
         </div>

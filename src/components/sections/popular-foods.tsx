@@ -1,19 +1,39 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { foods, getFoodsByCategory } from "@/data/foods";
-import { categories } from "@/data/categories";
-
-const filterOptions = [
-  { label: "All", value: "all", image: null },
-  ...categories
-    .filter((c) => ["sushi", "ramen", "udon", "danggo"].includes(c.slug))
-    .map((c) => ({ label: c.name, value: c.slug, image: c.image })),
-];
+import type { Category } from "@/types";
 
 export function PopularFoods() {
   const [activeFilter, setActiveFilter] = useState("all");
+  const [categories, setCategories] = useState<Category[]>([]);
+
+  useEffect(() => {
+    fetch(`${process.env.NEXT_PUBLIC_POS_API_URL || "http://localhost:8000"}/api/menu/categories`)
+      .then((r) => r.json())
+      .then((json) => {
+        const raw = json.data ?? [];
+        setCategories(
+          raw.map((c: { _id: string; name: string; slug: string; image?: string }) => ({
+            id: c._id,
+            name: c.name,
+            slug: c.slug,
+            image: c.image || "/assets/sushi-1.png",
+            description: "",
+            itemCount: 0,
+          }))
+        );
+      })
+      .catch(() => {});
+  }, []);
+
+  const filterOptions = [
+    { label: "All", value: "all", image: null },
+    ...categories
+      .filter((c) => ["sushi", "ramen", "udon-soba", "dango-sweets"].includes(c.slug))
+      .map((c) => ({ label: c.name, value: c.slug, image: c.image })),
+  ];
 
   const filteredFoods =
     activeFilter === "all"

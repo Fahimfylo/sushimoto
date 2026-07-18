@@ -36,14 +36,6 @@
   --radius: 0.5rem;
 }
 
-@import "../styles/sections/header.css" layer(components);
-@import "../styles/sections/hero.css" layer(components);
-@import "../styles/sections/about.css" layer(components);
-@import "../styles/sections/popular.css" layer(components);
-@import "../styles/sections/trending.css" layer(components);
-@import "../styles/sections/subscribe.css" layer(components);
-@import "../styles/sections/footer.css" layer(components);
-
 @layer base {
   :root {
     --playfair-display: "Playfair Display", serif;

@@ -1,10 +1,10 @@
 import { Metadata } from "next";
-import Link from "next/link";
 import { Search, ChevronDown, Grid3x3, List } from "lucide-react";
 import { foods } from "@/data/foods";
-import { categories } from "@/data/categories";
 import { FoodCard } from "@/components/cards/food-card";
 import { Container } from "@/components/layout/container";
+import CategoryNav from "@/components/navigation/category-nav";
+import { fetchCategories } from "@/lib/fetch-categories";
 
 export const metadata: Metadata = {
   title: "Menu | Sushimoto",
@@ -12,7 +12,9 @@ export const metadata: Metadata = {
     "Explore our carefully crafted menu of authentic Japanese dishes, from fresh sushi and ramen to traditional appetizers and desserts.",
 };
 
-export default function MenuPage() {
+export default async function MenuPage() {
+  const categories = await fetchCategories();
+
   return (
     <section className="py-16 md:py-24 lg:py-28">
       <Container>
@@ -27,23 +29,7 @@ export default function MenuPage() {
         </div>
 
         {/* Category Filter */}
-        <div className="sushi__hide-scrollbar mb-8 flex items-center gap-3 overflow-x-auto py-1.5">
-          <Link
-            href="/menu"
-            className="shrink-0 rounded-full bg-primary px-5 py-2 text-sm font-semibold text-white transition-all hover:bg-primary-dark"
-          >
-            All
-          </Link>
-          {categories.map((category) => (
-            <Link
-              key={category.id}
-              href={`/menu/${category.slug}`}
-              className="shrink-0 rounded-full border border-gray-200 bg-white px-5 py-2 text-sm font-medium text-gray-600 transition-all hover:border-primary hover:text-primary"
-            >
-              {category.name}
-            </Link>
-          ))}
-        </div>
+        <CategoryNav categories={categories} />
 
         {/* Controls */}
         <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">

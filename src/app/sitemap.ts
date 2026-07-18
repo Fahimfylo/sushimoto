@@ -1,10 +1,11 @@
 import type { MetadataRoute } from "next";
 import { foods } from "@/data/foods";
 import { blogPosts } from "@/data/blogs";
-import { categories } from "@/data/categories";
+import { fetchCategories } from "@/lib/fetch-categories";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = "https://sushimoto.com";
+  const categories = await fetchCategories();
 
   const staticPages = [
     { url: baseUrl, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 1 },
